@@ -26,9 +26,9 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDoModel createToDo(ToDoModel toDoModel) {
-        toDoRepository.save(modelMapper.map(toDoModel, ToDo.class));
+        ToDo toDo = toDoRepository.save(modelMapper.map(toDoModel, ToDo.class));
 
-        return toDoModel;
+        return modelMapper.map(toDo, ToDoModel.class);
     }
 
     @Override
