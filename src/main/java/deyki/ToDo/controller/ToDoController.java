@@ -22,38 +22,47 @@ public class ToDoController {
 
     @PostMapping("/create")
     public ResponseEntity<ToDoModel> createToDo(@RequestBody ToDoModel toDoModel) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.createToDo(toDoModel));
     }
 
     @GetMapping("/getToDo/{id}")
     public ResponseEntity<ToDoModel> getToDoById(@PathVariable Long id) {
+
         return ResponseEntity.status(HttpStatus.OK).body(toDoService.getToDoById(id));
     }
 
     @DeleteMapping("/deleteToDo/{id}")
     public ResponseEntity<String> deleteToDoById(@PathVariable Long id) {
+
         toDoService.deleteToDoById(id);
+
         return ResponseEntity.status(HttpStatus.OK).body("Deleted.");
     }
 
     @GetMapping("/listOfFinished")
     public ResponseEntity<List<ToDoModel>> listOfFinishedToDos() {
+
         return ResponseEntity.status(HttpStatus.OK).body(toDoService.listOfFinishedToDos());
     }
 
     @GetMapping("/listOfNotFinished")
     public ResponseEntity<List<ToDoModel>> listOfNotFinishedToDos() {
+
         return ResponseEntity.status(HttpStatus.OK).body(toDoService.listOfNotFinishedToDos());
     }
 
     @PutMapping("/updateToDo/{id}")
     public ResponseEntity<ToDoModel> updateToDoById(@PathVariable Long id, @RequestBody ToDoModel toDoModel) {
+
         return ResponseEntity.status(HttpStatus.OK).body(toDoService.updateToDoById(id, toDoModel));
     }
 
     @PutMapping("/changeStatus/{id}")
     public ResponseEntity<String> changeToDoStatus(@PathVariable Long id) {
+
         toDoService.changeStatusById(id);
+
         return ResponseEntity.status(HttpStatus.OK).body(String.format("ToDo with id: %d updated successfully!", id));
     }
 }
