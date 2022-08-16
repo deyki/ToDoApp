@@ -26,6 +26,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDoModel createToDo(ToDoModel toDoModel) {
+
         ToDo toDo = toDoRepository.save(modelMapper.map(toDoModel, ToDo.class));
 
         return modelMapper.map(toDo, ToDoModel.class);
@@ -33,6 +34,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDoModel getToDoById(Long id) {
+
         ToDo toDo = toDoRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("ToDo with id: %d not found!", id)));
@@ -42,6 +44,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public void deleteToDoById(Long id) {
+
         ToDo toDo = toDoRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("ToDo with id: %d not found!", id)));
@@ -51,6 +54,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public List<ToDoModel> listOfFinishedToDos() {
+
         return toDoRepository.listOfFinishedToDos()
                 .stream()
                 .map(toDo -> modelMapper.map(toDo, ToDoModel.class))
@@ -59,6 +63,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public List<ToDoModel> listOfNotFinishedToDos() {
+
         return toDoRepository.listOfNotFinishedToDos()
                 .stream()
                 .map(toDo -> modelMapper.map(toDo, ToDoModel.class))
@@ -67,6 +72,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDoModel updateToDoById(Long id, ToDoModel toDoModel) {
+
         ToDo toDo = toDoRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("ToDo with id: %d not found!", id)));
@@ -80,6 +86,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public void changeStatusById(Long id) {
+
         ToDo toDo = toDoRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("ToDo with id: %d not found!", id)));
