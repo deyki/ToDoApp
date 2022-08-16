@@ -77,4 +77,19 @@ public class ToDoServiceImpl implements ToDoService {
 
         return modelMapper.map(toDo, ToDoModel.class);
     }
+
+    @Override
+    public void changeStatusById(Long id) {
+        ToDo toDo = toDoRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("ToDo with id: %d not found!", id)));
+
+        if (toDo.getIsFinished().equals(false)) {
+            toDo.setIsFinished(true);
+        } else if (toDo.getIsFinished().equals(true)) {
+            toDo.setIsFinished(false);
+        }
+
+        toDoRepository.save(toDo);
+    }
 }

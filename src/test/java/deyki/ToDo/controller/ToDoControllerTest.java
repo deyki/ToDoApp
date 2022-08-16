@@ -1,6 +1,7 @@
 package deyki.ToDo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import deyki.ToDo.entity.ToDo;
 import deyki.ToDo.model.ToDoModel;
 import deyki.ToDo.service.impl.ToDoServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,9 +34,12 @@ class ToDoControllerTest {
 
     private ToDoModel toDoModel;
 
-
+    private ToDo toDo;
     @BeforeEach
     void setUp() {
+
+        this.toDo = ToDo.builder().id(20L).toDo("Work hard").isFinished(true).build();
+
         this.toDoModel = ToDoModel.builder().toDo("Andrew Tate top G").isFinished(false).build();
 
         this.finishedToDos = new ArrayList<>(List.of(new ToDoModel("Keep hustle", false), new ToDoModel("Don't give up", false)));
@@ -99,6 +103,14 @@ class ToDoControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/updateToDo/10")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(newToDoModel)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void whenChangeStatusById_thenDoNothing() throws Exception {
+        Mockito.doNothing().when(toDoService).changeStatusById(toDo.getId());
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/changeStatus/20"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

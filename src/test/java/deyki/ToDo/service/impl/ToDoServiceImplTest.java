@@ -6,6 +6,7 @@ import deyki.ToDo.model.ToDoModel;
 import deyki.ToDo.repository.ToDoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +101,15 @@ class ToDoServiceImplTest {
         ToDoModel updated = toDoService.updateToDoById(toDo.getId(), new ToDoModel("Top G Andrew Tate :D", false));
 
         assertEquals(updated.getToDo(), toDo.getToDo());
+    }
+
+    @Test
+    void whenChangeStatusById_thenDoNothing() {
+        Mockito.when(toDoRepository.findById(toDo.getId())).thenReturn(Optional.of(toDo));
+        Mockito.when(toDoRepository.save(toDo)).thenReturn(toDo);
+
+        toDoService.changeStatusById(toDo.getId());
+
+        assertEquals(toDo.getIsFinished(), true);
     }
 }

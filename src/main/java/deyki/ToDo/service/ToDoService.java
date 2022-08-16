@@ -17,4 +17,6 @@ public interface ToDoService {
     List<ToDoModel> listOfNotFinishedToDos();
 
     ToDoModel updateToDoById(Long id, ToDoModel toDoModel);
+
+    void changeStatusById(Long id);
 }

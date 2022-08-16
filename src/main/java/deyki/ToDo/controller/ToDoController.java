@@ -50,4 +50,10 @@ public class ToDoController {
     public ResponseEntity<ToDoModel> updateToDoById(@PathVariable Long id, @RequestBody ToDoModel toDoModel) {
         return ResponseEntity.status(HttpStatus.OK).body(toDoService.updateToDoById(id, toDoModel));
     }
+
+    @PutMapping("/changeStatus/{id}")
+    public ResponseEntity<String> changeToDoStatus(@PathVariable Long id) {
+        toDoService.changeStatusById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("ToDo with id: %d updated successfully!", id));
+    }
 }
