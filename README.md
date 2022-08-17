@@ -4,6 +4,6 @@
 
 # Info
 
-* Endpoints successfully tested with Postman.
+* Endpoints tested with Postman.
 
 * App functionalities: Create, Update, Delete, Get ToDo.Change ToDo status("isFinished" -> true || false).
