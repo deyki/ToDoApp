@@ -1,4 +1,4 @@
-# To-Do application
+# ToDo application
 
 * Tech-stack: Java, Spring-boot, Hibernate, PostgreSQL, JUnit5, Mockito.
 
