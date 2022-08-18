@@ -29,7 +29,6 @@ class ToDoServiceImplTest {
     private ToDoServiceImpl toDoService;
 
     private final ModelMapper modelMapper;
-
     private ToDo toDo;
     private List<ToDo> finishedToDos;
     private ToDoModel toDoModel;
@@ -41,6 +40,7 @@ class ToDoServiceImplTest {
 
     @BeforeEach
     void setUp() {
+        
         this.toDo = ToDo.builder().id(10L).toDo("Keep hustle").isFinished(false).build();
 
         this.finishedToDos = new ArrayList<>
@@ -49,6 +49,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenCreateToDo_thenReturnToDoModel() {
+        
         Mockito.when(toDoRepository.save(toDo)).thenReturn(toDo);
 
         this.toDoModel = toDoService.createToDo(modelMapper.map(toDo, ToDoModel.class));
@@ -58,6 +59,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenGetToDoById_thenReturnToDoModel() {
+        
         Mockito.when(toDoRepository.findById(toDo.getId())).thenReturn(Optional.of(toDo));
 
         this.toDoModel = toDoService.getToDoById(toDo.getId());
@@ -67,6 +69,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenDeleteToDoById_thenDoNothing() {
+        
         Mockito.when(toDoRepository.findById(toDo.getId())).thenReturn(Optional.of(toDo));
         Mockito.doNothing().when(toDoRepository).deleteById(toDo.getId());
 
@@ -77,6 +80,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenFindFinishedTodos_thenReturnListOfFinishedTodos() {
+        
         Mockito.when(toDoRepository.listOfFinishedToDos()).thenReturn(finishedToDos);
 
         List<ToDoModel> finishedToDos = toDoService.listOfFinishedToDos();
@@ -86,6 +90,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenFindNotFinishedTodos_thenReturnListOfNotFinishedToDos() {
+        
         Mockito.when(toDoRepository.listOfNotFinishedToDos()).thenReturn(List.of(toDo));
 
         List<ToDoModel> notFinishedTodos = toDoService.listOfNotFinishedToDos();
@@ -95,6 +100,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenUpdateToDoById_thenReturnToDoModel() {
+        
         Mockito.when(toDoRepository.findById(toDo.getId())).thenReturn(Optional.of(toDo));
         Mockito.when(toDoRepository.save(toDo)).thenReturn(toDo);
 
@@ -105,6 +111,7 @@ class ToDoServiceImplTest {
 
     @Test
     void whenChangeStatusById_thenDoNothing() {
+        
         Mockito.when(toDoRepository.findById(toDo.getId())).thenReturn(Optional.of(toDo));
         Mockito.when(toDoRepository.save(toDo)).thenReturn(toDo);
 
