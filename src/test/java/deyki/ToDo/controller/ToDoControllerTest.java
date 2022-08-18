@@ -21,6 +21,7 @@ import java.util.Optional;
 
 @WebMvcTest(ToDoController.class)
 class ToDoControllerTest {
+    
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -35,6 +36,7 @@ class ToDoControllerTest {
     private ToDoModel toDoModel;
 
     private ToDo toDo;
+    
     @BeforeEach
     void setUp() {
 
@@ -47,6 +49,7 @@ class ToDoControllerTest {
 
     @Test
     void whenCreateToDo_thenReturnToDoModel() throws Exception {
+        
         Mockito.when(toDoService.createToDo(toDoModel)).thenReturn(toDoModel);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/create")
@@ -57,6 +60,7 @@ class ToDoControllerTest {
 
     @Test
     void whenGetToDoById_thenReturnToDoModel() throws Exception {
+        
         Mockito.when(toDoService.getToDoById(10L)).thenReturn(toDoModel);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/getToDo/10")
@@ -67,6 +71,7 @@ class ToDoControllerTest {
 
     @Test
     void  whenDeleteToDoById_thenDoNothing() throws Exception {
+        
         Mockito.doNothing().when(toDoService).deleteToDoById(10L);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/deleteToDo/10"))
@@ -77,6 +82,7 @@ class ToDoControllerTest {
 
     @Test
     void whenGetListOfFinishedToDos_thenReturnFinishedToDos() throws Exception {
+        
         Mockito.when(toDoService.listOfFinishedToDos()).thenReturn(finishedToDos);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/listOfFinished")
@@ -87,6 +93,7 @@ class ToDoControllerTest {
 
     @Test
     void whenGetListOfNotFinishedToDos_thenReturnListOfNotFinishedToDos() throws Exception {
+        
         Mockito.when(toDoService.listOfNotFinishedToDos()).thenReturn(List.of(toDoModel));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/listOfNotFinished")
@@ -97,8 +104,10 @@ class ToDoControllerTest {
 
     @Test
     void whenUpdateToDoById_thenReturnToDoModel() throws Exception {
+        
         ToDoModel newToDoModel = new ToDoModel("Andrew Tate > Jake Paul :D", false);
         Mockito.when(toDoService.updateToDoById(10L, newToDoModel)).thenReturn(newToDoModel);
+        
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/updateToDo/10")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -108,6 +117,7 @@ class ToDoControllerTest {
 
     @Test
     void whenChangeStatusById_thenDoNothing() throws Exception {
+        
         Mockito.doNothing().when(toDoService).changeStatusById(toDo.getId());
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/changeStatus/20"))
