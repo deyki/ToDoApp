@@ -1,8 +1,6 @@
-# ToDo application
+# Info
 
 * Tech-stack: Java, Spring-boot, Hibernate, PostgreSQL, JUnit5, Mockito.
-
-# Info
 
 * Endpoints tested with Postman.
 
